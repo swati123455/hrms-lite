@@ -10,19 +10,26 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req,res)=>{
+app.get("/", (req, res) => {
   res.send("HRMS Backend Running 🚀");
 });
 
 app.use("/api/employees", employeeRoutes);
 app.use("/api/attendance", attendanceRoutes);
 
-mongoose.connect(process.env.MONGO_URI)
-.then(()=> console.log("MongoDB Connected"))
-.catch(err=> console.log(err));
-
 const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, ()=>{
-  console.log(`Server running on port ${PORT}`);
+// CONNECT DATABASE FIRST
+mongoose.connect(process.env.MONGO_URI)
+.then(() => {
+  console.log("MongoDB Connected");
+
+  // Start server only after DB connection
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+
+})
+.catch(err => {
+  console.error("MongoDB connection error:", err);
 });
