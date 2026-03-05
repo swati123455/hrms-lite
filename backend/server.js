@@ -17,6 +17,12 @@ app.use(
 );
 
 /* ---------------- MIDDLEWARE ---------------- */
+
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
+
 app.use(express.json());
 
 /* ---------------- TEST ROUTES ---------------- */
