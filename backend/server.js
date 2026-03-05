@@ -7,49 +7,37 @@ const attendanceRoutes = require("./routes/attendanceRoutes");
 
 const app = express();
 
-/* ---------------- CORS CONFIG ---------------- */
 app.use(
   cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"],
+    origin: [
+      "https://hrms-lite-omega-navy.vercel.app",
+      "http://localhost:5173"
+    ],
+    methods: ["GET","POST","PUT","DELETE"],
+    credentials: true
   })
 );
 
-/* ---------------- MIDDLEWARE ---------------- */
-
-app.use(cors({
-  origin: true,
-  credentials: true
-}));
-
 app.use(express.json());
 
-/* ---------------- TEST ROUTES ---------------- */
 app.get("/", (req, res) => {
   res.send("HRMS Backend Running 🚀");
 });
 
-app.get("/health", (req, res) => {
-  res.json({ status: "Server is healthy ✅" });
-});
-
-/* ---------------- API ROUTES ---------------- */
 app.use("/api/employees", employeeRoutes);
 app.use("/api/attendance", attendanceRoutes);
 
-/* ---------------- DATABASE CONNECTION ---------------- */
 const PORT = process.env.PORT || 8000;
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("MongoDB Connected ✅");
+mongoose.connect(process.env.MONGO_URI)
+.then(() => {
+  console.log("MongoDB Connected");
 
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
   });
+
+})
+.catch(err => {
+  console.error("MongoDB connection error:", err);
+});
