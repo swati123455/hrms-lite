@@ -7,8 +7,8 @@ It allows organizations to manage employees and track attendance through a simpl
 
 ## Live Demo
 
-Frontend: https://hrms-lite.vercel.app \
-Backend API: https://hrms-lite-backend.onrender.com/api
+Frontend: https://hrms-lite-omega-navy.vercel.app \
+Backend API: https://hrms-lite-rk6w.onrender.com/api/employees
 
 ---
 
