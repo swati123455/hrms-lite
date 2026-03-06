@@ -13,11 +13,9 @@ app.use(
       "https://hrms-lite-omega-navy.vercel.app",
       "http://localhost:5173"
     ],
-    methods: ["GET","POST","PUT","DELETE"],
     credentials: true
   })
 );
-
 app.use(express.json());
 
 app.get("/", (req, res) => {
