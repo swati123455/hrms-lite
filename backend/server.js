@@ -7,16 +7,10 @@ const attendanceRoutes = require("./routes/attendanceRoutes");
 
 const app = express();
 
-app.use(
-  cors({
-    origin: [
-      "https://hrms-lite-omega-navy.vercel.app",
-      "http://localhost:5173"
-    ],
-    methods: ["GET", "POST", "DELETE", "PUT"],
-    credentials: true
-  })
-);
+app.use(cors());
+
+// THIS IS CRITICAL
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("HRMS Backend Running 🚀");

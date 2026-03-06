@@ -3,6 +3,7 @@ const router = express.Router();
 const Employee = require("../models/Employee");
 
 router.post("/", async (req, res) => {
+    console.log(req.body); 
   try {
     const employee = new Employee(req.body);
     await employee.save();
